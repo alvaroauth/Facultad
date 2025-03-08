@@ -1,0 +1,105 @@
+programa ejercicio4
+procesos
+  proceso moverFlor(ES hf:boolean)
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    si (HayFlorEnLaEsquina)
+      tomarFlor
+    sino
+      hf:=F
+    Pos(miAv,miCa)
+    LiberarEsquina(10,10) 
+  fin
+  proceso moverFlor2
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    BloquearEsquina(11,11)
+    Pos(11,11)
+    depositarFlor
+    Pos(miAv,miCa)
+    LiberarEsquina(11,11)
+  fin
+  proceso recolectarTodo
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    BloquearEsquina(11,11)
+    Pos(11,11)
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+    Pos(miAv,miCa)
+    LiberarEsquina(11,11)
+  fin
+  proceso identificar
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+  fin
+areas
+  a1:AreaP(9,9,9,9)
+  a2:AreaP(9,10,9,10)
+  a3:AreaP(9,11,9,11)
+  a4:AreaP(9,12,9,12)
+  af:AreaP(1,1,1,1)
+  a10:AreaPC(10,10,10,10)
+  a11:AreaC(11,11,11,11)
+robots
+  robot movedor
+  variables
+    id:numero
+    sigo:boolean
+  comenzar
+    sigo:=V
+    RecibirMensaje(id,jefe)
+    mientras (sigo)
+      moverFlor(sigo)
+      si(sigo)
+        moverFlor2
+    EnviarMensaje(id,jefe)
+  fin
+  robot fiscal
+  variables
+    ult:numero
+  comenzar
+    identificar
+    repetir 4
+      RecibirMensaje(ult, *)
+    Informar(ult)
+    recolectarTodo
+  fin
+variables
+  r1,r2,r3,r4:movedor
+  jefe:fiscal
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r1,a10)
+  AsignarArea(r1,a11)
+  AsignarArea(r2,a2)
+  AsignarArea(r2,a10)
+  AsignarArea(r2,a11)
+  AsignarArea(r3,a3)
+  AsignarArea(r3,a10)
+  AsignarArea(r3,a11)
+  AsignarArea(r4,a4)
+  AsignarArea(r4,a10)
+  AsignarArea(r4,a11)
+  AsignarArea(jefe,af)
+  AsignarArea(jefe,a11)
+  Iniciar(jefe,1,1)
+  Iniciar(r1,9,9)
+  Iniciar(r2,9,10)
+  Iniciar(r3,9,11)
+  Iniciar(r4,9,12)
+fin 

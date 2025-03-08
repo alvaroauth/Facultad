@@ -1,0 +1,92 @@
+programa parcial10
+procesos
+  proceso juntarFlores(ES f: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      f:=f+1
+  fin
+  proceso invertir
+  comenzar
+    repetir 2
+      derecha
+  fin
+  proceso depositarTodo(E a:numero ; E c:numero)
+  comenzar
+    BloquearEsquina(a,20)
+    mover
+    depositarFlor
+    Pos(a,c)
+    LiberarEsquina(a,20)
+  fin
+  proceso empujarFlores
+  variables
+    f:numero
+    miAv, miCa:numero
+  comenzar
+    f:=0
+    miAv:=PosAv
+    miCa:=PosCa
+    juntarFlores(f)
+    repetir f
+      depositarTodo(miAv,miCa)
+  fin
+areas
+  linea1: AreaC (9,20,19,20)
+  a1: AreaP(9,19,19,19)
+  a2: AreaP(9,21,19,21)
+  depo: AreaPC(20,20,20,20)
+robots
+  robot movedor
+  variables
+    id:numero
+  comenzar
+    RecibirMensaje(id,junta)
+    si (id=2)
+      invertir
+    repetir 10
+      Pos(PosAv+1,PosCa)
+      empujarFlores
+      si(id=1)
+        EnviarMensaje(V, r2)
+      sino 
+        EnviarMensaje(V, r1)
+      RecibirMensaje(
+      EnviarMensaje(id,junta)
+      EnviarMensaje(V,junta)
+  fin
+  robot recolector
+  variables
+    b1,b2:boolean
+    id, f:numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    derecha
+    f:=0
+    repetir 10
+      b1:=F
+      b2:=F
+      repetir 2
+        RecibirMensaje(id, *)
+        si (id=1)
+          RecibirMensaje(b1,r1)
+        sino
+          RecibirMensaje(b2,r2)
+      mover
+      juntarFlores(f)      
+  fin
+variables
+  r1:movedor
+  r2:movedor
+  junta:recolector
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r1,linea1)
+  AsignarArea(r2,a2)
+  AsignarArea(r2,linea1)
+  AsignarArea(junta,linea1)
+  Iniciar(r1, 9,19)
+  Iniciar(r2, 9,21)
+  Iniciar(junta, 9,20)
+fin

@@ -1,0 +1,112 @@
+programa ejemplo
+procesos
+  proceso juntarFlores(ES f: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      f:=f+1
+  fin
+areas
+  a11: AreaP(6,1,6,1)
+  a21: AreaP(1,2,5,50)
+  ac: AreaPC(6,2,6,50)
+  a12: AreaP(6,51,6,60)
+  a22: AreaP(7,2,60,50)
+  af: AreaP(100,100,100,100)
+robots
+  robot robotF1
+  variables
+    id,ca:numero
+    f:numero
+  comenzar
+    f:=0
+    RecibirMensaje(id,fiscal)
+    RecibirMensaje(ca,r2)
+    repetir ca-2
+      juntarFlores(f)
+      mover
+    juntarFlores(f)
+    BloquearEsquina(6,ca)
+    mover
+    juntarFlores(f)
+    EnviarMensaje(id,fiscal)
+    mover
+    LiberarEsquina(6,ca)
+    repetir 59-ca
+      juntarFlores(f)
+      mover
+    juntarFlores(f)
+    EnviarMensaje(id,fiscal)
+    EnviarMensaje(f,fiscal)
+  fin
+  robot robotF2
+  variables
+    id,ca:numero
+    f:numero
+  comenzar
+    f:=0
+    RecibirMensaje(id,fiscal)
+    RecibirMensaje(ca,fiscal)
+    EnviarMensaje(ca,r1)
+    Pos(1,ca)
+    derecha
+    repetir 4
+      juntarFlores(f)
+      mover
+    juntarFlores(f)
+    BloquearEsquina(6,ca)
+    mover
+    juntarFlores(f)
+    EnviarMensaje(id,fiscal)
+    mover
+    LiberarEsquina(6,ca)
+    repetir 53
+      juntarFlores(f)
+      mover
+    juntarFlores(f)
+    EnviarMensaje(id, fiscal)
+    EnviarMensaje(f,fiscal)
+  fin
+  robot fiscalizador
+  variables
+    f1,f2, id:numero
+    ca:numero
+    gano,seg:numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    Random(ca,2,50)
+    EnviarMensaje(ca,r2)
+    RecibirMensaje(gano,*)
+    si(gano=1)
+      RecibirMensaje(seg,r2)
+    sino
+      RecibirMensaje(seg,r1)
+    Informar(gano)
+    repetir 2
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(f1,r1)
+      sino
+        RecibirMensaje(f2,r2)
+    si f1 >= f2
+      Informar(f1)
+    sino
+      Informar(f2)
+  fin
+variables
+  r1:robotF1
+  r2:robotF2
+  fiscal:fiscalizador
+comenzar
+  AsignarArea(r1, a11)
+  AsignarArea(r1, a12)
+  AsignarArea(r1, ac)
+  AsignarArea(r2, a21)
+  AsignarArea(r2, a22)
+  AsignarArea(r2, ac)
+  AsignarArea(fiscal,af)
+  Iniciar(r1, 6,1)
+  Iniciar(r2, 1,2)
+  Iniciar(fiscal, 100,100)
+fin

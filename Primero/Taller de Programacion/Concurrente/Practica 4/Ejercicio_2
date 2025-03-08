@@ -1,0 +1,95 @@
+programa ejemplo
+procesos
+  proceso juntarPapeles(ES p: numero)
+  comenzar
+    mientras ((HayPapelEnLaEsquina)&(p<5))
+      tomarPapel
+      p:=p+1
+  fin
+  proceso depositarTodo(E p:numero)
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    BloquearEsquina(50,50)
+    Pos(50,50)
+    repetir p
+      depositarPapel
+    Pos(miAv,miCa)
+    LiberarEsquina(50,50)
+  fin
+  proceso juntarTodo(ES ok:boolean;E p:numero)
+  variables
+    miAv,miCa:numero
+    aux:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    BloquearEsquina(50,50)
+    Pos(50,50)
+    mientras (p<>0) & (ok)
+      si HayPapelEnLaEsquina
+        tomarPapel
+        p:=p-1
+      sino
+        ok:=F
+    Pos(miAv,miCa)
+    LiberarEsquina(50,50)
+  fin
+areas
+  a1: AreaP (5,1,5,100)
+  a2: AreaP (10,1,10,100)
+  depo: AreaC(50,50,50,50)
+  ac1: AreaP(11,1,11,1)
+  ac2: AreaP(12,1,12,1)
+robots
+  robot productor
+  variables
+    p:numero
+  comenzar
+    mientras (PosCa <> 100)
+      p:=0
+      juntarPapeles(p)
+      mientras((PosCa <> 100) & (p<5))
+        mover
+        juntarPapeles(p)
+      depositarTodo(p)
+    p:=0
+    juntarPapeles(p)
+    si p<>0
+      depositarTodo(p)
+  fin
+  robot consumidor
+  variables
+    cont:numero
+    p:numero
+    ok:boolean
+  comenzar
+    cont:=0
+    mientras cont<8
+      Random(p,2,5)
+      ok:=V
+      juntarTodo(ok,p)
+      si ok
+        cont :=0
+      sino
+        cont := cont +1
+  fin
+variables
+  r1,r2:productor
+  c1,c2:consumidor
+comenzar
+  AsignarArea(r1, a1)
+  AsignarArea(r1, depo)
+  AsignarArea(r2, a2)
+  AsignarArea(r2, depo)
+  AsignarArea(c1,ac1)
+  AsignarArea(c1,depo)
+  AsignarArea(c2,ac2)
+  AsignarArea(c2,depo)
+  Iniciar(r1,5,1)
+  Iniciar(r2,10,1)
+  Iniciar(c1,11,1)
+  Iniciar(c2,12,1)
+fin

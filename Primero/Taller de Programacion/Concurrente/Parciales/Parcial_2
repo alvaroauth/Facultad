@@ -1,0 +1,124 @@
+programa parcial2
+procesos
+  proceso juntarFlores(ES f:numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      f:=f+1
+  fin
+  proceso juntarPapeles
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+  fin
+  proceso recorrerAvenidaF(ES f:numero)
+  variables
+    miAv:numero
+  comenzar
+    miAv:=PosAv
+    repetir 9
+      juntarFlores(f)
+      mover
+    juntarFlores(f)
+    Pos(miAv,1)
+  fin
+  proceso recorrerAvenidaP
+  comenzar
+    repetir 9
+      juntarPapeles
+      mover
+    juntarPapeles
+  fin
+  proceso identificar
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso maximo(E f:numero;E id:numero;ES fm1:numero;ES fm2:numero;ES im1:numero;ES im2:numero)
+  comenzar
+    si(f>fm1)
+      fm2:=fm1
+      im2:=im1
+      fm1:=f
+      im1:=id
+    sino
+      si(f>fm2)
+        fm2:=f
+        im2:=id
+  fin
+  proceso avisarJuntadores(E im1:numero;E im2:numero)
+  comenzar
+    si(im1=1)|(im2=1)
+      EnviarMensaje(V,r1)
+    sino
+      EnviarMensaje(F,r1)
+    si(im1=2)|(im2=2)
+      EnviarMensaje(V,r2)
+    sino
+      EnviarMensaje(F,r2)
+    si(im1=3)|(im2=3)
+      EnviarMensaje(V,r3)
+    sino
+      EnviarMensaje(F,r3)
+  fin
+areas
+  a1:AreaP(5,1,5,10)
+  a2:AreaP(6,1,6,10)
+  a3:AreaP(7,1,7,10)
+  ac:AreaP(1,1,1,1)
+robots
+  robot juntador
+  variables
+    flores:numero
+    id:numero
+    gane:boolean
+  comenzar
+    flores:=0
+    RecibirMensaje(id,coord)
+    recorrerAvenidaF(flores)
+    EnviarMensaje(id, coord)
+    EnviarMensaje(flores, coord)
+    RecibirMensaje(gane,coord)
+    si(gane)
+      recorrerAvenidaP
+      EnviarMensaje(id,coord)
+  fin
+  robot coordinador
+  variables
+    max1,max2,iMax1,iMax2:numero
+    flores, id:numero
+    primero, seg:numero
+  comenzar
+    max1:=-1
+    max2:=-1
+    identificar
+    repetir 3
+      RecibirMensaje(id,*)
+      si (id=1)
+        RecibirMensaje(flores, r1)
+      sino
+        si(id=2)
+          RecibirMensaje(flores, r2)
+        sino
+          RecibirMensaje(flores, r3)
+      maximo(flores,id,max1,max2,iMax1,iMax2)
+    avisarJuntadores(iMax1,iMax2)
+    RecibirMensaje(primero,*)
+    RecibirMensaje(seg,*)
+    Informar(primero)
+  fin
+variables
+  r1,r2,r3:juntador
+  coord:coordinador
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a2)
+  AsignarArea(r3,a3)
+  AsignarArea(coord,ac)
+  Iniciar(r1,5,1)
+  Iniciar(r2,6,1)
+  Iniciar(r3,7,1)
+  Iniciar(coord,1,1)
+fin
+    

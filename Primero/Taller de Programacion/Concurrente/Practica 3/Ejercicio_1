@@ -1,0 +1,111 @@
+programa ejercicio1
+procesos
+  proceso juntarFlor(ES f:numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      f:=f+1
+  fin
+  proceso juntarPapel(ES p:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      p:=p+1
+  fin
+  proceso accederF(ES f:numero)
+  variables
+    ca,av,miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    Random(av,1,5)
+    Random(ca,1,10)
+    BloquearEsquina(av,ca)
+    Pos(av,ca)
+    juntarFlor(f)
+    Pos(miAv,miCa)
+    LiberarEsquina(av,ca)
+  fin
+  proceso accederP(ES p:numero)
+  variables
+    ca,av,miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    Random(av,6,10)
+    Random(ca,1,9)
+    BloquearEsquina(av,ca)
+    Pos(av,ca)
+    juntarPapel(p)
+    Pos(miAv,miCa)
+    LiberarEsquina(av,ca)
+  fin
+  proceso depositar( E b:boolean)
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    si(b)
+      depositarFlor
+    sino
+      depositarPapel
+    Pos(miAv,miCa)
+    LiberarEsquina(10,10)   
+  fin
+areas
+  frero: AreaPC(1,1,5,10)
+  pleros: AreaPC(6,1,10,9)
+  dejar: AreaC(10,10,10,10)
+  f1: AreaP(6,10,6,10)
+  f2: AreaP(7,10,7,10)
+  p1: AreaP(8,10,8,10)
+  p2: AreaP(9,10,9,10)
+robots
+  robot flo
+  variables
+    f:numero
+  comenzar
+    f:=0
+    repetir 5
+      accederF(f)
+    repetir f
+      depositar(V)
+  fin
+  robot pap
+  variables
+    p:numero
+  comenzar
+    p:=0
+    repetir 3
+      accederP(p)
+    repetir p
+      depositar(F)
+  fin
+variables
+  fl1:flo
+  fl2:flo
+  pa1:pap
+  pa2:pap
+comenzar
+  AsignarArea(fl1,f1)
+  AsignarArea(fl2,f2)
+  AsignarArea(pa1,p1)
+  AsignarArea(pa2,p2)
+  AsignarArea(fl1,dejar)
+  AsignarArea(fl2,dejar)
+  AsignarArea(pa1,dejar)
+  AsignarArea(pa2,dejar)
+  AsignarArea(fl1,frero)
+  AsignarArea(fl2,frero)
+  AsignarArea(pa1,pleros)
+  AsignarArea(pa2,pleros)
+  Iniciar(fl1,6,10)
+  Iniciar(fl2,7,10)
+  Iniciar(pa1,8,10)
+  Iniciar(pa2,9,10)
+fin
+  
+          

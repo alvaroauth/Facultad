@@ -1,0 +1,116 @@
+programa parcial8
+procesos
+  proceso juntarFlores(ES f: numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      f:=f+1
+  fin
+  proceso vaciarse
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    mientras HayFlorEnLaBolsa
+      depositarFlor
+    Pos(miAv,miCa)
+    LiberarEsquina(10,10)
+  fin
+  proceso recorrerCalle(ES f:numero)
+  variables
+    aux:numero
+  comenzar
+    aux:=0
+    mientras (PosAv<>100)&(f<10)&(aux<5)
+      juntarFlores(f)
+      mover
+      aux:=aux+1
+    vaciarse
+  fin
+  proceso identificar
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+  fin
+  proceso evaluacion (ES f:numero)
+  comenzar
+    f:=0
+    juntarFlores(f)
+    vaciarse
+  fin
+  proceso juntar(E f:numero)
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    repetir f
+      tomarFlor
+    Pos(miAv,miCa)
+    LiberarEsquina(10,10)
+  fin
+areas
+  a1: AreaP (1,3,100,3)
+  a2: AreaP (1,4,100,4)
+  ac: AreaP (1,5,1,5)
+  deposito: AreaC(10,10,10,10)
+robots
+  robot recolector
+  variables
+    flores:numero
+    id:numero
+  comenzar
+    RecibirMensaje(id,cose)
+    derecha
+    mientras(PosAv <> 100)
+      flores:=0
+      recorrerCalle(flores)
+      EnviarMensaje(id,cose)
+      EnviarMensaje(flores, cose)
+      EnviarMensaje(F,cose)
+    evaluacion(flores)
+    EnviarMensaje(id, cose)
+    EnviarMensaje(flores,cose)
+    EnviarMensaje(V,cose)
+  fin
+  robot cosechador
+  variables
+    re1,re2:boolean
+    f,fTotal:numero
+    id:numero
+  comenzar
+    fTotal:=0
+    re1:=F
+    re2:=F
+    identificar
+    mientras ~(re1 & re2)
+      RecibirMensaje(id, *)
+      si(id=1)
+        RecibirMensaje(f, r1)
+        RecibirMensaje(re1,r1)
+      sino
+        RecibirMensaje(f,r2)
+        RecibirMensaje(re2,r2)
+      fTotal:= fTotal + f
+      juntar(f)
+    Informar(fTotal)
+  fin
+variables
+  r1,r2:recolector
+  cose:cosechador
+comenzar
+  AsignarArea(r1, a1)
+  AsignarArea(r1, deposito)
+  AsignarArea(r2, a2)
+  AsignarArea(r2, deposito)
+  AsignarArea(cose, ac)
+  AsignarArea(cose, deposito)
+  Iniciar(r1, 1,3)
+  Iniciar(r2, 1,4)
+  Iniciar(cose, 1,5)
+fin

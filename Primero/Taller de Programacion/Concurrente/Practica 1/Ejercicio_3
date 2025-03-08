@@ -1,0 +1,80 @@
+programa ejercicio3
+procesos
+  proceso juntarPapel (ES p:numero)
+  variables
+    aux:numero
+  comenzar
+    aux := 0
+    mientras(HayPapelEnLaEsquina)
+      p := p+1
+      aux := aux +1
+      tomarPapel
+    repetir aux
+      depositarPapel
+  fin
+  
+  proceso juntarFlor (ES f:numero)
+  variables
+    aux:numero
+  comenzar
+    aux := 0
+    mientras(HayFlorEnLaEsquina)
+      f := f+1
+      aux := aux + 1
+      tomarFlor
+    repetir aux
+      depositarFlor
+  fin
+  
+  proceso escalon(E l: numero; ES cumple:numero)
+  variables
+    p, f: numero
+  comenzar
+    p := 0
+    f := 0
+    repetir 2
+      repetir l
+        juntarPapel(p)
+        juntarFlor(f)
+        mover
+      derecha
+    repetir 2
+      derecha
+    si ( p - f = 1)
+      cumple := cumple +1
+  fin
+  
+  proceso escalera ( ES cumple:numero)
+  variables
+    aux  : numero
+  comenzar
+    aux := 1
+    repetir 4
+      escalon(aux, cumple)
+      aux := aux + 1
+  fin
+areas
+  ciudad: AreaC (12,6,32,24)
+robots
+  robot robot1
+  variables
+    cant : numero
+  comenzar
+    cant := 0
+    escalera (cant)
+    Informar(cant)
+  fin
+
+variables
+  r1: robot1
+  r2: robot1
+  r3: robot1
+  
+comenzar
+  AsignarArea(r1,ciudad)
+  AsignarArea(r2,ciudad)
+  AsignarArea(r3,ciudad)
+  Iniciar(r1, 22, 6)
+  Iniciar(r2, 17, 10)
+  Iniciar(r3, 12, 14)
+fin

@@ -1,0 +1,101 @@
+programa ejercicio5
+procesos
+  proceso identificar
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+  fin
+  proceso fuentePapel (ES hp:boolean)
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    BloquearEsquina(11,11)
+    Pos(11,11)
+    si HayPapelEnLaEsquina
+      tomarPapel
+    sino
+      hp:=F
+    Pos(miAv,miCa)
+    LiberarEsquina(11,11)
+  fin
+  proceso maximo( E ca:numero ; ES caMax:numero ; E id:numero ; ES idMax:numero)
+  comenzar
+    si(ca>caMax)
+      caMax := ca
+      idMax := id
+  fin
+areas
+  a1:AreaP(4,1,4,100)
+  a2:AreaP(6,1,6,100)
+  a3:AreaP(8,1,8,100)
+  a4:AreaP(10,1,10,100)
+  fuente:AreaPC(11,11,11,11)
+  ac:AreaP(1,1,1,1)
+robots
+  robot corredor
+  variables
+    hp:boolean
+    miCa, id:numero
+  comenzar
+    RecibirMensaje(id,coord)
+    hp:=V
+    fuentePapel(hp)
+    mientras(hp)&(PosCa <> 100)
+      depositarPapel
+      mover
+      fuentePapel(hp)
+    miCa:=PosCa
+    EnviarMensaje(id, coord)
+    EnviarMensaje(miCa, coord)
+  fin
+  robot coordinador
+  variables
+    ca, caMax:numero
+    id, idMax:numero
+  comenzar
+    identificar
+    caMax:=-1
+    repetir 4
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(ca,r1)
+      sino
+        si(id=2)
+          RecibirMensaje(ca,r2)
+        sino
+          si(id=3)
+            RecibirMensaje(ca,r3)
+          sino
+            RecibirMensaje(ca,r4)
+      maximo(ca,caMax,id,idMax)
+    Informar(idMax)
+  fin
+variables
+  r1,r2,r3,r4:corredor
+  coord:coordinador
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a2)
+  AsignarArea(r3,a3)
+  AsignarArea(r4,a4)
+  AsignarArea(coord,ac)
+  AsignarArea(r1,fuente)
+  AsignarArea(r2,fuente)
+  AsignarArea(r3,fuente)
+  AsignarArea(r4,fuente)
+  Iniciar(r1,4,1)
+  Iniciar(r2,6,1)
+  Iniciar(r3,8,1)
+  Iniciar(r4,10,1)
+  Iniciar(coord,1,1)
+fin
+  
+    
+  
+    
+    
+  

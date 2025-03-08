@@ -1,0 +1,118 @@
+programa ejercicio3
+procesos
+  proceso acceso(E a:numero ; E c:numero; ES f:numero; ES termine:boolean)
+  variables
+    miAv,miCa:numero
+  comenzar
+    miCa:=PosCa
+    miAv:=PosAv
+    BloquearEsquina(a,c)
+    Pos(a,c)
+    si (HayFlorEnLaEsquina)
+      tomarFlor
+      f:=f+1
+    sino
+      termine := V
+    Pos(miAv,miCa)
+    LiberarEsquina(a,c)
+  fin
+  proceso identificar
+  comenzar
+    EnviarMensaje(1,robot1)
+    EnviarMensaje(2,robot2)
+    EnviarMensaje(3,robot3)
+    EnviarMensaje(4,robot4)
+  fin
+  proceso esquina (E a:numero ; E c:numero)
+  comenzar
+    EnviarMensaje(a,robot1)
+    EnviarMensaje(c,robot1)
+    EnviarMensaje(a,robot2)
+    EnviarMensaje(c,robot2)
+    EnviarMensaje(a,robot3)
+    EnviarMensaje(c,robot3)
+    EnviarMensaje(a,robot4)
+    EnviarMensaje(c,robot4)
+  fin
+  proceso actualizarMax(E id:numero;E f:numero;ES fm:numero;ES idm:numero)
+  comenzar
+    si(f>fm)
+      fm := f
+      idm:= id
+  fin
+areas
+  fis: AreaP(1,1,1,1)
+  r1: AreaP(2,1,2,1)
+  r2: AreaP(3,1,3,1)
+  r3: AreaP(4,1,4,1)
+  r4: AreaP(5,1,5,1)
+  zona: AreaPC(2,2,10,10)
+  
+robots
+  robot recolector
+  variables
+    f,id:numero
+    av,ca:numero
+    termine:boolean
+  comenzar
+    f:=0
+    RecibirMensaje(id,fiscal)
+    RecibirMensaje(av,fiscal)
+    RecibirMensaje(ca,fiscal)
+    termine := F
+    mientras(termine = F)
+      acceso(av,ca,f,termine)
+    EnviarMensaje(id,fiscal)
+    EnviarMensaje(f,fiscal)
+  fin
+  robot fiscalizador
+  variables
+    flores, floresMax:numero
+    gano, id:numero
+    av,ca:numero
+  comenzar
+    identificar
+    Random(av,2,10)
+    Random(ca,2,10)
+    esquina(av,ca)
+    floresMax:=-1
+    repetir 4
+      RecibirMensaje(id, *)
+      si (id=1)
+        RecibirMensaje(flores,robot1)
+      sino
+        si(id=2)
+          RecibirMensaje(flores,robot2)
+        sino
+          si(id=3)
+            RecibirMensaje(flores,robot3)
+          sino
+            RecibirMensaje(flores,robot4)
+      actualizarMax(id,flores,floresMax,gano)
+    Informar('Ganador',gano)
+  fin
+variables
+  robot1,robot2,robot3,robot4:recolector
+  fiscal:fiscalizador
+comenzar
+  AsignarArea(robot1,r1)
+  AsignarArea(robot1,zona)
+  AsignarArea(robot2,r2)
+  AsignarArea(robot2,zona)
+  AsignarArea(robot3,r3)
+  AsignarArea(robot3,zona)
+  AsignarArea(robot4,r4)
+  AsignarArea(robot4,zona)
+  AsignarArea(fiscal,fis)
+  Iniciar(fiscal,1,1)
+  Iniciar(robot1,2,1)
+  Iniciar(robot2,3,1)
+  Iniciar(robot3,4,1)
+  Iniciar(robot4,5,1)
+fin
+    
+      
+    
+    
+    
+  

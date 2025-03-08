@@ -1,0 +1,80 @@
+programa ejercicio4
+procesos
+
+  proceso juntarPapeles
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  
+  proceso juntarFlores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  
+  proceso recorrerAvenidaP 
+  comenzar
+    repetir 99
+      juntarPapeles
+      mover
+    juntarPapeles
+  fin
+  
+  proceso recorrerAvenidaF
+  comenzar
+    repetir 99
+      juntarFlores
+      mover
+    juntarFlores
+  fin
+  
+  proceso recorrerAreaP
+  comenzar
+    repetir 24
+      recorrerAvenidaP
+      Pos(PosAv+1,1)
+    recorrerAvenidaP
+  fin
+  
+  proceso recorrerAreaF
+  comenzar
+    repetir 24
+      recorrerAvenidaF
+      Pos(PosAv+1,1)
+    recorrerAvenidaF
+  fin
+    
+areas
+  a1: AreaP(1,1,25,100)
+  a2: AreaP(26,1,50,100)
+  a3: AreaP(51,1,75,100)
+  a4: AreaP(76,1,100,100)
+robots
+  robot impar
+  comenzar
+    recorrerAreaF
+    Pos(PosAv+26,1)
+    recorrerAreaF
+  fin
+ 
+  robot par
+  comenzar
+    recorrerAreaP
+    Pos(PosAv+26,1)
+    recorrerAreaP
+  fin
+ 
+variables
+  i:impar
+  p:par
+comenzar
+  AsignarArea(i,a1)
+  AsignarArea(i,a3)
+  AsignarArea(p,a2)
+  AsignarArea(p,a4)
+  Iniciar(i,1,1)
+  Iniciar(p,26,1)
+fin
+  
+   

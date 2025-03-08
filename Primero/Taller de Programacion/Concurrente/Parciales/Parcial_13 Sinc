@@ -1,0 +1,111 @@
+programa parcial13
+procesos
+  proceso juntarFlores(ES f: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      f:=f+1
+  fin
+  proceso barrera( E id:numero)
+  variables
+    ok:boolean
+  comenzar
+    si(id=1)
+      EnviarMensaje(V,r2)
+      EnviarMensaje(V,r3)
+      RecibirMensaje(ok,*)
+      RecibirMensaje(ok,*)
+    sino
+      si(id=2)
+        EnviarMensaje(V,r1)
+        EnviarMensaje(V,r3)
+        RecibirMensaje(ok,*)
+        RecibirMensaje(ok,*)
+      sino
+        EnviarMensaje(V,r2)
+        EnviarMensaje(V,r1)
+        RecibirMensaje(ok,*)
+        RecibirMensaje(ok,*)
+  fin
+  proceso barrera2
+  variables
+    ok:boolean
+  comenzar
+    EnviarMensaje(V, coord)
+    RecibirMensaje(ok, coord)
+  fin
+  proceso depositarDeAUna (E f:numero)
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    repetir f
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      depositarFlor
+      Pos(miAv,miCa)
+      LiberarEsquina(50,50)
+  fin
+  proceso cuadrado (ES f:numero; E lado:numero)
+  comenzar
+    repetir 4
+      repetir lado
+        juntarFlores(f)
+        mover
+      juntarFlores(f)
+      derecha
+  fin
+areas
+  a1: AreaP (1,1,6,30)
+  a2: AreaP (8,1,13,30)
+  a3: AreaP (15,1,20,30)
+  deposito: AreaPC(50,50,50,50)
+  af:AreaP(51,51,51,51)
+robots
+  robot robot1
+  variables
+    lado, flores:numero
+    id:numero
+    miAv,miCa:numero
+  comenzar
+    miAv:= PosAv
+    RecibirMensaje(id,coord)
+    repetir 5
+      miCa:=PosCa+1
+      Random(lado,1,5)
+      cuadrado(flores,lado)
+      barrera2
+      Pos(miAv,miCa+lado)
+    depositarDeAUna(flores)
+  fin
+  robot coordinador
+  variables
+    ok:boolean
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)  
+    EnviarMensaje(3,r3)
+    repetir 4
+      repetir 3
+        RecibirMensaje(ok, *)
+      EnviarMensaje(V,r1)
+      EnviarMensaje(V,r2)  
+      EnviarMensaje(V,r3)
+  fin
+variables
+  r1,r2,r3:robot1
+  coord:coordinador
+comenzar
+  AsignarArea(r1, a1)
+  AsignarArea(r1, deposito)
+  AsignarArea(r2, a2)
+  AsignarArea(r2, deposito)
+  AsignarArea(r3, a3)
+  AsignarArea(r3, deposito)
+  AsignarArea(coord,af)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 8,1)
+  Iniciar(r3, 15,1)
+  Iniciar(coord, 51,51)
+fin

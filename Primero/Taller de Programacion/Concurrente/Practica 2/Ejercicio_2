@@ -1,0 +1,104 @@
+programa ejercicio2
+procesos
+  proceso depositarFlores ( E f:numero )
+  comenzar
+    repetir f
+      depositarFlor
+  fin
+  
+  proceso depositarPapeles ( E p:numero )
+  comenzar
+    repetir p
+      depositarPapel
+  fin 
+  
+  proceso contarFlores( ES f:numero )
+  variables
+    aux : numero
+  comenzar
+    aux := 0
+    mientras(HayFlorEnLaEsquina)
+      f:= f+1
+      tomarFlor
+      aux := aux+1
+    depositarFlores(aux)
+  fin
+  
+  proceso contarPapeles( ES p:numero )
+  variables
+    aux : numero
+  comenzar
+    aux := 0
+    mientras(HayPapelEnLaEsquina)
+      p:= p+1
+      tomarPapel
+      aux := aux+1
+    depositarPapeles(aux)
+  fin
+  
+  proceso escalon(E altura:numero ; ES cant:numero)
+  variables
+    f, p:numero
+  comenzar
+    repetir altura
+      contarFlores(f)
+      contarPapeles(p)
+      mover
+    contarFlores(f)
+    contarPapeles(p)
+    derecha
+    mover
+    repetir 3
+      derecha
+    si (f > p)
+      cant := cant +1
+  fin
+  
+  proceso escalera(ES cant: numero)
+  comenzar
+    cant := 0
+    escalon(1,cant)
+    escalon(5,cant)
+    escalon(2,cant)
+    escalon(4,cant)
+  fin
+  
+areas
+  af: AreaP(1,1,1,1)
+  ar: AreaC(2,1,17,37)
+  
+robots
+  robot fiscal
+  variables
+    acum, aux:numero
+  comenzar
+    acum := 0
+    repetir 3
+      RecibirMensaje(aux, *)
+      acum := acum + aux
+    Informar(acum)
+  fin
+  
+  robot robot1
+  variables
+    cont:numero
+  comenzar
+    escalera(cont)
+    EnviarMensaje(cont, fis)
+  fin
+  
+variables
+  fis:fiscal
+  r1:robot1
+  r2:robot1
+  r3:robot1
+comenzar
+  AsignarArea(fis,af)
+  AsignarArea(r1,ar)
+  AsignarArea(r2,ar)
+  AsignarArea(r3,ar)
+  Iniciar(fis,1,1)
+  Iniciar(r1,2,1)
+  Iniciar(r2,7,1)
+  Iniciar(r3,12,1)
+fin

@@ -1,0 +1,76 @@
+programa ejercicio2
+procesos
+  proceso juntarPapel (ES p:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      p := p+1
+  fin
+  proceso lado(E l: numero; ES pa:numero)
+  comenzar
+    l := l-1
+    pa := 0
+    repetir l
+      juntarPapel(pa)
+      mover
+    juntarPapel(pa)
+  fin
+areas
+  l1: AreaP (10,10,10,29)
+  l2: AreaP (10,30,29,30)
+  l3: AreaP (30,11,30,30)
+  l4: AreaP (11,10,30,10)
+robots
+  robot robot1
+  variables
+    papel:numero
+  comenzar
+    lado(20,papel)
+    Informar(papel)
+  fin
+  
+  robot robot2
+  variables
+    papel:numero
+  comenzar
+    derecha
+    lado(20,papel)
+    Informar(papel)
+  fin
+  
+  robot robot3
+  variables
+    papel:numero
+  comenzar
+    repetir 2
+      derecha
+    lado(20,papel)
+    Informar(papel)
+  fin
+  
+  robot robot4
+  variables
+    papel:numero
+  comenzar
+    repetir 3
+      derecha
+    lado(20,papel)
+    Informar(papel)
+  fin
+  
+variables
+  r1: robot1
+  r2: robot2
+  r3: robot3
+  r4: robot4
+  
+comenzar
+  AsignarArea(r1, l1)
+  AsignarArea(r2, l2)
+  AsignarArea(r3, l3)
+  AsignarArea(r4, l4)
+  Iniciar(r1,10,10)
+  Iniciar(r2,10,30)
+  Iniciar(r3,30,30)
+  Iniciar(r4,30,10)
+fin

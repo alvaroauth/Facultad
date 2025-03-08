@@ -1,0 +1,130 @@
+programa parcial17
+procesos
+  proceso juntarPapeles(ES p:numero;ES cont:numero)
+  comenzar
+    si HayPapelEnLaEsquina
+      mientras HayPapelEnLaEsquina
+        tomarPapel
+        p:=p+1
+      cont:=cont+1
+  fin
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  proceso depositarDeAUna(E p:numero)
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    repetir p
+      BloquearEsquina(99,99)
+      Pos(99,99)
+      depositarPapel
+      Pos(miAv,miCa)
+      LiberarEsquina(99,99)
+  fin
+  proceso identificar
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso barrera
+  variables
+    ok:boolean
+  comenzar
+    EnviarMensaje(V,fiscal)
+    RecibirMensaje(ok,fiscal)
+  fin
+  proceso lado(E pasos:numero;ES p:numero;ES cont:numero)
+  comenzar
+    p:=0
+    repetir pasos
+      juntarPapeles(p,cont)
+      mover
+    juntarPapeles(p,cont)
+    depositarDeAUna(p)
+  fin
+areas
+  a1:AreaP(2,1,18,13)
+  a2:AreaP(32,1,48,13)
+  a3:AreaP(62,1,78,13)
+  af:AreaP(1,1,1,1)
+  depo:AreaC(99,99,99,99)
+robots
+  robot papelero
+  variables
+    id:numero
+    p,cont:numero
+    alt,anc:numero
+  comenzar
+    RecibirMensaje(id,fiscal)
+    Random(alt,1,3)
+    Random(anc,2,4)
+    cont:=0
+    p:=0
+    repetir 4
+      lado(alt,p,cont)
+      derecha
+      lado(anc,p,cont)
+      izquierda
+      barrera
+    EnviarMensaje(id,fiscal)
+    EnviarMensaje(p,fiscal)
+    EnviarMensaje(cont,fiscal)
+  fin
+  robot fiscalizador
+  variables
+    total,p, esq, e:numero
+    id:numero
+    ok:boolean
+  comenzar
+    identificar
+    total:=0
+    esq:=0
+    repetir 4
+      repetir 3
+        RecibirMensaje(ok,*)
+      EnviarMensaje(V,r1)
+      EnviarMensaje(V,r2)
+      EnviarMensaje(V,r3)
+    repetir 3
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(p,r1)
+        RecibirMensaje(e,r1)
+      sino
+        si(id=2)
+          RecibirMensaje(p,r2)
+          RecibirMensaje(e,r2)
+        sino
+          RecibirMensaje(p,r3)
+          RecibirMensaje(e,r3)
+      total:=total+p
+      esq:=esq+e
+    Pos(99,99)
+    repetir total
+      tomarPapel
+    Pos(1,1)
+    Informar(esq)
+  fin
+variables
+  r1,r2,r3:papelero
+  fiscal:fiscalizador
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r1,depo)
+  AsignarArea(r2,a2)
+  AsignarArea(r2,depo)
+  AsignarArea(r3,a3)
+  AsignarArea(r3,depo)
+  AsignarArea(fiscal,af)
+  AsignarArea(fiscal,depo)
+  Iniciar(fiscal,1,1)
+  Iniciar(r1,2,1)
+  Iniciar(r2,32,1)
+  Iniciar(r3,62,1)
+fin

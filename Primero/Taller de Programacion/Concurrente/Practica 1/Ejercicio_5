@@ -1,0 +1,128 @@
+programa ejercicio5
+procesos
+{----------------------------------------------}
+  proceso juntarPapeles( ES p:numero )
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      p:= p+1
+      tomarPapel
+  fin
+{----------------------------------------------}
+  proceso juntarFlores ( ES f:numero ) 
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      f:= f+1
+      tomarFlor
+  fin
+{----------------------------------------------}
+  proceso depositarPapeles( E p:numero )
+  comenzar
+    repetir p
+      depositarPapel
+  fin
+{----------------------------------------------}
+  proceso depositarFlores( E f:numero )
+  comenzar
+    repetir f
+      depositarFlor
+  fin
+{----------------------------------------------}
+  proceso recorrerLineaP (E pasos:numero)
+  variables
+    a, c, p:numero
+  comenzar
+    a:=PosAv
+    c:=PosCa
+    p:=0
+    repetir pasos
+      juntarPapeles(p)
+      mover
+    juntarPapeles(p)
+    Pos(a,c)
+    depositarPapeles(p)
+  fin
+{----------------------------------------------}
+  proceso recorrerLineaF (E pasos:numero)
+  variables
+    f:numero
+  comenzar
+    f:=0
+    repetir pasos
+      juntarFlores(f)
+      mover
+    depositarFlores(f)
+  fin 
+{----------------------------------------------}
+areas
+  a11: AreaP(1,75,15,75)
+  a12: AreaP(1,80,15,80)
+  a21: AreaP(75,80,75,100)
+  a22: AreaP(80,80,80,100)
+  a31: AreaP(70,10,100,10)
+  a32: AreaP(70,15,100,15)
+  a41: AreaP(10,1,10,10)
+  a42: AreaP(15,1,15,10)
+{----------------------------------------------}
+robots
+  robot pap2
+  variables
+    pasos:numero
+  comenzar
+    pasos:=20
+    recorrerLineaP(pasos)
+    Pos(PosAv+5,PosCa)
+    recorrerLineaP(pasos)
+  fin
+{----------------------------------------------}
+  robot pap4
+  variables
+    pasos:numero
+  comenzar
+    pasos:=9
+    recorrerLineaP(pasos)
+    Pos(PosAv+5,PosCa)
+    recorrerLineaP(pasos)
+  fin
+{----------------------------------------------}
+  robot flo1
+  variables
+    pasos:numero
+  comenzar
+    pasos:= 14
+    derecha
+    recorrerLineaF(pasos)
+    Pos(PosAv-(pasos),PosCa+5)
+    recorrerLineaF(pasos)
+  fin
+{----------------------------------------------}
+  robot flo3
+  variables
+    pasos:numero
+  comenzar
+    pasos:= 30
+    derecha
+    recorrerLineaF(pasos)
+    Pos(PosAv-(pasos),PosCa+5)
+    recorrerLineaF(pasos)
+  fin
+{----------------------------------------------}
+variables
+  r1:flo1
+  r3:flo3
+  r2:pap2
+  r4:pap4
+{----------------------------------------------}
+comenzar
+  AsignarArea(r1,a11)
+  AsignarArea(r1,a12)
+  AsignarArea(r2,a21)
+  AsignarArea(r2,a22)
+  AsignarArea(r3,a31)
+  AsignarArea(r3,a32)
+  AsignarArea(r4,a41)
+  AsignarArea(r4,a42)
+  Iniciar(r1,1,75)
+  Iniciar(r2,75,80)
+  Iniciar(r3,70,10)
+  Iniciar(r4,10,1)
+fin

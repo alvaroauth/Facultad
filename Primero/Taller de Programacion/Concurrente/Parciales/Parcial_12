@@ -1,0 +1,127 @@
+programa parcial12
+procesos
+  proceso juntarFlores(ES f: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      f:=f+1
+  fin
+  proceso lado (E lado:numero;ES f:numero)
+  comenzar
+    repetir lado
+      juntarFlores(f)
+      mover
+    juntarFlores(f)
+  fin
+  proceso invertir
+  comenzar
+    repetir 2
+      derecha
+  fin
+  proceso depositarDeAUna(E f:numero)
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    repetir f
+      BloquearEsquina(20,20)
+      Pos(20,20)
+      depositarFlor
+      Pos(miAv,miCa)
+      LiberarEsquina(20,20)
+  fin
+  proceso identificar
+  comenzar
+    EnviarMensaje(1,r1A)
+    EnviarMensaje(1,r2A)
+    EnviarMensaje(2,r1B)
+    EnviarMensaje(2,r2B)
+  fin
+areas
+  area1A: AreaP(1,1,1,11)
+  area1ADos: AreaP(2,11,11,11)
+  area2A: AreaP(2,1,11,1)
+  area2ADos: AreaP(11,2,11,10)
+  area1B: AreaP(13,1,13,11)
+  area1BDos: AreaP(14,11,23,11)
+  area2B: AreaP(14,1,23,1)
+  area2BDos: AreaP(23,2,23,10)
+  areaF: AreaP(30,1,30,1)
+  esquina: AreaPC(20,20,20,20)
+robots
+  robot primero
+  variables
+    flores, id:numero
+  comenzar
+    RecibirMensaje(id, fiscal)
+    flores:=0
+    lado(10,flores)
+    derecha
+    lado(10,flores)
+    si (id=1)
+      EnviarMensaje(flores,r2A)
+    sino
+      EnviarMensaje(flores,r2B)
+    depositarDeAUna(flores)
+  fin
+  robot segundo
+  variables
+    flores, aux:numero
+    id:numero
+  comenzar
+    flores:=0
+    RecibirMensaje(id, fiscal)
+    si (id=1)
+      RecibirMensaje(aux,r1A)
+    sino
+      RecibirMensaje(aux,r1B)
+    invertir
+    lado(9,flores)
+    derecha
+    lado(9,flores)
+    EnviarMensaje(id, fiscal)
+    EnviarMensaje(flores+aux,fiscal)
+    depositarDeAUna(flores)
+  fin
+  robot fiscalizador
+  variables
+    floresA, floresB:numero
+    id:numero
+  comenzar
+    identificar
+    repetir 2
+      RecibirMensaje(id, *)
+      si (id=1)
+        RecibirMensaje(floresA, r2A)
+      sino
+        RecibirMensaje(floresB, r2B)
+    si floresA > floresB
+      Informar(floresA)
+    sino
+      Informar(floresB)
+  fin
+variables
+  r1A,r1B:primero
+  r2A,r2B:segundo
+  fiscal:fiscalizador
+comenzar
+  AsignarArea(r1A, area1A)
+  AsignarArea(r1A, area1ADos)
+  AsignarArea(r1A, esquina)
+  AsignarArea(r2A, area2A)
+  AsignarArea(r2A, area2ADos)
+  AsignarArea(r2A, esquina)
+  AsignarArea(r1B, area1B)
+  AsignarArea(r1B, area1BDos)
+  AsignarArea(r1B, esquina)
+  AsignarArea(r2B, area2B)
+  AsignarArea(r2B, area2BDos)
+  AsignarArea(r2B, esquina)
+  AsignarArea(fiscal, areaF)
+  Iniciar(r1A, 1, 1)
+  Iniciar(r1B, 13,1)
+  Iniciar(r2A, 11,10)
+  Iniciar(r2B, 23,10)
+  Iniciar(fiscal, 30,1)
+fin

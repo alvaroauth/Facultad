@@ -1,0 +1,126 @@
+programa parcial11
+procesos
+  proceso juntarFlores(ES f: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      f:=f+1
+  fin
+  proceso depositarUna
+  variables
+    miAv,miCa:numero
+  comenzar
+    miAv:=PosAv
+    miCa:=PosCa
+    BloquearEsquina(25,25)
+    Pos(25,25)
+    depositarFlor
+    Pos(miAv,miCa)
+    LiberarEsquina(25,25)
+  fin
+  proceso identificar
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso asignarPerimetro
+  variables
+    av,ca:numero
+  comenzar
+    Random(av,1,5)
+    Random(ca,1,10)
+    EnviarMensaje(av,r1)
+    EnviarMensaje(ca,r1)
+    Random(av,1,5)
+    Random(ca,1,10)
+    EnviarMensaje(av,r2)
+    EnviarMensaje(ca,r2)
+    Random(av,1,5)
+    Random(ca,1,10)
+    EnviarMensaje(av,r3)
+    EnviarMensaje(ca,r3)
+  fin
+  proceso lado(E pasos:numero;ES f:numero)
+  comenzar
+    repetir pasos
+      juntarFlores(f)
+      mover
+    juntarFlores(f)
+    derecha
+  fin
+  proceso maximo (E c1:numero;E c2:numero;E c3:numero; ES id:numero)
+  variables
+    max:numero
+  comenzar
+    max:=-1
+    si(c1 > max)
+      max := c1
+      id := 1
+    si(c2 > max)
+      max := c2
+      id := 2
+    si (c3 > max)
+      max := c3
+      id:= 3
+  fin
+areas
+  a1: AreaP (1,1,6,11)
+  a2: AreaP (7,1,12,11)
+  a3: AreaP (13,1,18,11)
+  ac: AreaP (24,24,24,24)
+  deposito: AreaPC (25,25,25,25)
+robots
+  robot recolector
+  variables
+    flores:numero
+    id:numero
+    av,ca:numero
+  comenzar
+    flores:=0
+    RecibirMensaje(id,coord)
+    RecibirMensaje(av,coord)
+    RecibirMensaje(ca,coord)
+    repetir 2
+      lado(ca,flores)
+      lado(av,flores)
+    repetir flores
+      depositarUna
+    EnviarMensaje(id, coord)
+    EnviarMensaje(flores,coord)
+  fin
+  robot coordinador
+  variables 
+    c1,c2,c3:numero
+    id,idMax:numero
+  comenzar
+    identificar
+    asignarPerimetro
+    repetir 3
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(c1,r1)
+      sino
+        si (id=2)
+          RecibirMensaje(c2,r2)
+        sino
+          RecibirMensaje(c3,r3)
+    maximo(c1,c2,c3,idMax)
+    Informar(idMax)
+  fin
+variables
+  r1,r2,r3:recolector
+  coord:coordinador
+comenzar
+  AsignarArea(r1, a1)
+  AsignarArea(r1, deposito)
+  AsignarArea(r2, a2)
+  AsignarArea(r2, deposito)
+  AsignarArea(r3, a3)
+  AsignarArea(r3, deposito)
+  AsignarArea(coord, ac)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 7,1)
+  Iniciar(r3, 13,1)
+  Iniciar(coord, 24,24)
+fin

@@ -1,0 +1,146 @@
+programa ejercicio4
+procesos
+  proceso limpiarEsq(ES cant:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant := cant +1
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      cant := cant +1
+  fin
+  proceso acceder (ES cant :numero)
+  variables
+    caIni, avIni, av, ca:numero
+  comenzar
+    avIni:=PosAv
+    caIni:=PosCa
+    Random(av, 25, 75)
+    Random(ca, 25, 75)
+    Pos(av,ca)
+    limpiarEsq(cant)
+    Pos(avIni,caIni)
+  fin
+  proceso darAcceso
+  variables
+    id:numero
+  comenzar
+    Random(id,1,4)
+    si(id==1)
+      EnviarMensaje(V,r1)
+    sino
+      si(id==2)
+        EnviarMensaje(V,r2)
+      sino
+        si(id==3)
+          EnviarMensaje(V,r3)
+        sino
+          EnviarMensaje(V,r4)
+  fin
+  proceso continuar
+  comenzar
+    EnviarMensaje(V,r1)
+    EnviarMensaje(V,r2)
+    EnviarMensaje(V,r3)
+    EnviarMensaje(V,r4)  
+  fin  
+  proceso finalizar
+  comenzar
+    EnviarMensaje(F,r1)
+    EnviarMensaje(F,r2)
+    EnviarMensaje(F,r3)
+    EnviarMensaje(F,r4)  
+  fin
+  proceso identificar
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)  
+  fin
+  proceso aumentarCant(E id:numero ; ES c1:numero ; ES c2:numero ; ES c3:numero ; ES c4:numero)
+  variables
+    cant:numero
+  comenzar
+    si(id==1)
+      RecibirMensaje(cant,r1)
+      c1 := c1 + cant
+    sino
+      si(id==2)
+        RecibirMensaje(cant,r2)
+        c2 := c2 + cant
+      sino
+        si(id==3)
+          RecibirMensaje(cant,r3)
+          c3 := c3 + cant
+        sino
+          RecibirMensaje(cant,r4)
+          c4 := c4 + cant
+  fin
+areas
+  cuad: AreaPC(25,25,75,75)
+  af: AreaP(1,1,1,1)
+  a1: AreaP(25,1,25,1)
+  a2: AreaP(30,1,30,1)
+  a3: AreaP(35,1,35,1)
+  a4: AreaP(40,1,40,1)
+robots
+  robot recol
+  variables
+    acceso, sigo:boolean
+    cant, id:numero
+  comenzar
+    cant:=0
+    sigo:=V
+    RecibirMensaje(id,fiscal)
+    RecibirMensaje(sigo,fiscal)
+    mientras(sigo)
+      acceso:=F
+      RecibirMensaje(acceso, fiscal)
+      mientras(acceso)
+        acceder(cant)
+        acceso:=F
+        EnviarMensaje(id,fiscal)
+        EnviarMensaje(cant,fiscal)
+      RecibirMensaje(sigo,fiscal)
+  fin
+  robot fis
+  variables
+    ca1,ca2,ca3,ca4:numero
+    quien:numero
+  comenzar
+    ca1:=0
+    ca2:=0
+    ca3:=0
+    ca4:=0
+    identificar
+    repetir 10
+      continuar
+      darAcceso
+      finalizar
+      RecibirMensaje(quien,*)
+      aumentarCant(quien,ca1,ca2,ca3,ca4)
+    finalizar
+  fin
+variables
+  fiscal:fis
+  r1:recol
+  r2:recol
+  r3:recol
+  r4:recol
+comenzar
+  AsignarArea(r1,cuad)
+  AsignarArea(r2,cuad)
+  AsignarArea(r3,cuad)
+  AsignarArea(r4,cuad)
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a2)
+  AsignarArea(r3,a3)
+  AsignarArea(r4,a4)
+  AsignarArea(fiscal,af)
+  Iniciar(fiscal,1,1)
+  Iniciar(r1,25,1)
+  Iniciar(r2,30,1)
+  Iniciar(r3,35,1)
+  Iniciar(r4,40,1)
+fin  

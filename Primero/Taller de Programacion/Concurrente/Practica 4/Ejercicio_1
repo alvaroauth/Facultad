@@ -1,0 +1,116 @@
+programa ejercicio1
+procesos
+  proceso juntarFlores
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+  fin
+  proceso identificar
+  comenzar
+    EnviarMensaje(1,cli1)
+    EnviarMensaje(2,cli2)
+    EnviarMensaje(3,cli3)
+  fin
+  proceso avanzarDejandoFlores
+  comenzar
+    mientras((HayFlorEnLaBolsa)&(PosAv<100))
+      depositarFlor
+      mover
+    si ((HayFlorEnLaBolsa)&(PosAv=100))
+      depositarFlor
+  fin
+areas
+  a1: AreaPC (1,1,1,100)
+  a2: AreaPC (2,1,2,100)
+  a3: AreaPC (3,1,3,100)
+  as: AreaP(100,100,100,100)
+robots
+  robot cliente
+  variables
+    ok:boolean
+    av,ca:numero
+    id,cf:numero
+  comenzar
+    RecibirMensaje(id,servi)
+    mientras(PosAv<>100)
+      Random(cf,1,4)
+      ca:=PosCa + 1
+      av:=PosAv
+      EnviarMensaje(id,servi)
+      EnviarMensaje(cf,servi)
+      EnviarMensaje(av,servi)
+      EnviarMensaje(ca,servi)
+      RecibirMensaje(ok,servi)
+      Pos(av,ca)
+      juntarFlores
+      Pos(av,ca-1)
+      avanzarDejandoFlores
+    EnviarMensaje(id,servi)
+    EnviarMensaje(0,servi)
+  fin
+  robot servidor
+  variables
+    ok1,ok2,ok3:boolean
+    id,cf,av,ca:numero
+  comenzar
+    ok1:=V
+    ok2:=V
+    ok3:=V
+    juntarFlores
+    identificar
+    mientras((ok1)|(ok2)|(ok3))
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(cf,cli1)
+        si(cf <> 0)
+          RecibirMensaje(av,cli1)
+          RecibirMensaje(ca,cli1)
+          Pos(av,ca)
+          repetir cf
+            depositarFlor
+          Pos(100,100)
+          EnviarMensaje(V,cli1)
+        sino 
+          ok1:=F
+      sino
+        si (id=2)
+          RecibirMensaje(cf,cli2)
+          si(cf <> 0)
+            RecibirMensaje(av,cli2)
+            RecibirMensaje(ca,cli2)
+            Pos(av,ca)
+            repetir cf
+              depositarFlor
+            Pos(100,100)
+            EnviarMensaje(V,cli2)
+          sino 
+            ok2:=F
+        sino
+          RecibirMensaje(cf,cli3)
+          si(cf <> 0)
+            RecibirMensaje(av,cli3)
+            RecibirMensaje(ca,cli3)
+            Pos(av,ca)
+            repetir cf
+              depositarFlor
+            Pos(100,100)
+            EnviarMensaje(V,cli3)
+          sino 
+            ok3:=F
+  fin
+variables
+  cli1,cli2,cli3:cliente
+  servi:servidor
+comenzar
+  AsignarArea(cli1, a1)
+  AsignarArea(cli2, a2)
+  AsignarArea(cli3, a3)
+  AsignarArea(servi, a1)
+  AsignarArea(servi, a2)
+  AsignarArea(servi, a3)
+  AsignarArea(servi,as)
+  Iniciar(cli1, 1,1)
+  Iniciar(cli2, 2,1)
+  Iniciar(cli3, 3,1)
+  Iniciar(servi, 100,100)
+fin

@@ -1,0 +1,161 @@
+programa ejercicio2
+procesos
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  proceso juntarPapeles(ES p:numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      p:=p+1
+  fin
+  proceso escalonP (E l:numero; ES p:numero)
+  comenzar
+    repetir l
+      mover
+    juntarPapeles(p)
+    izquierda
+    repetir l
+      mover
+    juntarPapeles(p)
+    derecha
+  fin
+  proceso esquinaP(ES p:numero)
+  comenzar
+    BloquearEsquina(16,16)
+    mover
+    EnviarMensaje(2,fiscal)
+    juntarPapeles(p)
+    repetir 2
+      derecha
+    mover
+    LiberarEsquina(16,16)
+  fin
+  proceso recorrido1P(ES p:numero)
+  variables
+    aux:numero
+  comenzar
+    aux:=5
+    repetir 4
+      escalonP(aux,p)
+      aux:=aux-1
+    mover
+    juntarPapeles(p)
+    izquierda
+  fin
+  proceso recorrido2P(ES p:numero)
+  variables
+    aux:numero
+  comenzar
+    aux := 2
+    repetir 4
+      escalonP(aux,p)
+      aux := aux+1
+  fin
+{-------------------------------------------------------------}
+  proceso juntarFlores(ES f:numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      f:=f+1
+  fin
+  proceso escalonF(E l:numero; ES f:numero)
+  comenzar
+    repetir l
+      mover
+    juntarFlores(f)
+    derecha
+    repetir l
+      mover
+    juntarFlores(f)
+    izquierda
+  fin
+  proceso recorrido1F(ES f:numero)
+  variables
+    aux:numero
+  comenzar
+    aux := 5
+    repetir 4
+      escalonF(aux,f)
+      aux := aux -1
+    mover
+    juntarFlores(f)
+    derecha
+  fin
+  proceso esquinaF(ES f:numero)
+  comenzar
+    BloquearEsquina(16,16)
+    mover
+    EnviarMensaje(1,fiscal)
+    juntarFlores(f)
+    repetir 2
+      derecha
+    mover
+    LiberarEsquina(16,16)
+  fin
+  proceso recorrido2F(ES f:numero)
+  variables
+    aux:numero
+  comenzar
+    aux := 2
+    repetir 4
+      escalonF(aux,f)
+      aux := aux+1
+  fin
+areas
+  areaC1: AreaP(1,1,14,30)
+  areaC12: AreaP(15,2,15,30)
+  areaC2: AreaP(17,1,31,30)
+  areaF: AreaP(15,1,15,1)
+  medio: AreaPC(16,16,16,16)
+
+robots
+  robot corredorP
+  variables
+    p, id:numero
+  comenzar
+    RecibirMensaje (id, fiscal)
+    p:=0
+    recorrido1P(p)
+    esquinaP(p)
+    recorrido2P(p)
+    Informar('PapelesRecogidos',p)
+  fin
+  robot corredorF
+  variables
+    f,id:numero
+  comenzar
+    RecibirMensaje(id,fiscal)
+    f:=0
+    recorrido1F(f)
+    esquinaF(f)
+    recorrido2F(f)
+    Informar('FloresRecogidas',f)
+  fin
+  robot fiscalizador
+  variables
+    gano,seg:numero
+  comenzar
+    EnviarMensaje(1,robot1)
+    EnviarMensaje(2,robot2)
+    RecibirMensaje(gano, *)
+    RecibirMensaje(seg, *)
+    Informar(gano)
+  fin
+variables
+  robot1:corredorF
+  robot2:corredorP
+  fiscal:fiscalizador
+comenzar
+  AsignarArea(robot1,areaC1)
+  AsignarArea(robot1,areaC12)
+  AsignarArea(robot1,medio)
+  AsignarArea(robot2,areaC2)
+  AsignarArea(robot2,medio)
+  AsignarArea(fiscal,areaF)
+  Iniciar(robot1,1,1)
+  Iniciar(robot2,31,1)
+  Iniciar(fiscal,15,1)
+fin
