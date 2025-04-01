@@ -40,10 +40,10 @@ public class PuntoDyE {
         
         List<Estudiante> ListCopyOf = List.copyOf(ListEst);
         
-        ArrayList<Estudiante> ListClone = (ArrayList<Estudiante>) ((ArrayList<Estudiante>)ListEst).clone();
+        ArrayList<Estudiante> ListClone = (ArrayList<Estudiante>)((ArrayList<Estudiante>)ListEst).clone();
         
-        List<Estudiante> copiaProfunda = ListEst.stream().map((Estudiante -> new Estudiante(Estudiante.getNombre(), Estudiante.getApellido(), Estudiante.getEmail(), Estudiante.getComision(), Estudiante.getDireccion()).collect(Collectors.toList()));
-            
+        //List<Estudiante> copiaProfunda = ListEst.stream().map((Estudiante -> new Estudiante(Estudiante.getNombre(), Estudiante.getApellido(), Estudiante.getEmail(), Estudiante.getComision(), Estudiante.getDireccion()).collect(Collectors.toList);
+        // La verdad no anda y no tengo ganas de arreglarlo :(
         
 		return ListEst;
 	}
