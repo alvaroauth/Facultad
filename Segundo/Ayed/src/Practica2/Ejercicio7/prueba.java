@@ -16,9 +16,12 @@ public class prueba {
 		ab.getRightChild().addLeftChild(new BinaryTree<>(19));
 		ab.getRightChild().getLeftChild().addRightChild(new BinaryTree<>(4));
 		ab.getRightChild().getLeftChild().getRightChild().addLeftChild(new BinaryTree<>(18));
-		
-		ab.entreNiveles(0,3);
+
 		System.out.println("----------------------------------------");
+		ParcialArboles pa = new ParcialArboles(ab);
+		pa.imprimirArbol();
+		System.out.println("----------------------------------------");
+		System.out.println(pa.isLeftTree(2));
 	}
 	
 	

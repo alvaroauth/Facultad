@@ -96,7 +96,7 @@ public class BinaryTree <T> {
     	if(!this.isEmpty()) {
     		if (this.hasLeftChild())
     			this.getLeftChild().imprimirInOrden();
-    		System.out.println(this.getData());
+    		System.out.println(this.getData().toString());
     		if (this.hasRightChild())
     			this.getRightChild().imprimirInOrden();
     	}
@@ -118,7 +118,7 @@ public class BinaryTree <T> {
  				
  			for (int i=0;i<cantNodos;i++) {  
  				BinaryTree <T> elem = cola.remove();
- 				System.out.print("|" + elem.getData()+"|");
+ 				System.out.print("|" + elem.getData().toString()+"|");
  				if (elem.hasLeftChild())cola.offer(elem.getLeftChild());
  				if (elem.hasRightChild())cola.offer(elem.getRightChild());
  			}
