@@ -109,7 +109,6 @@ public class BinaryTree <T> {
  		Queue <BinaryTree<T>> cola =  new LinkedList<BinaryTree<T>>();  //la cola
  		cola.offer(this); 
  		int nivelActual=0;    
- 		boolean ok = true;
  		
  		while (!cola.isEmpty() && nivelActual<=m) { 
  			int cantNodos = cola.size();

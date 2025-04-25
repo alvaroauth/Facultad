@@ -45,7 +45,18 @@ if (!string.IsNullOrEmpty(st)){
         case 13:
             Ejercicio13.ejecutar();
             break;
-        
+        case 14:
+            Ejercicio14.ejecutar();
+            break;
+        case 15:
+            Ejercicio15.ejecutar();
+            break;
+        case 16:
+            Ejercicio16.ejecutar();
+            break;
+        default:
+            Ejercicio17.ejecutar();
+            break;
     }
 }
 Console.ReadKey();

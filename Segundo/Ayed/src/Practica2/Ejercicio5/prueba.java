@@ -1,5 +1,4 @@
 package Practica2.Ejercicio5;
-import java.util.*;
 import Practica2.Ejercicio1.BinaryTree;
 
 

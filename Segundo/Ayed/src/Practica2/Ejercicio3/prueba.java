@@ -1,5 +1,4 @@
 package Practica2.Ejercicio3;
-import java.util.*;
 import Practica2.Ejercicio1.BinaryTree;
 
 
@@ -16,8 +15,6 @@ public class prueba {
 		ab.getRightChild().addRightChild(new BinaryTree<>(27));
 		ab.getRightChild().getRightChild().addLeftChild(new BinaryTree<>(25));
 		ab.getRightChild().getRightChild().addRightChild(new BinaryTree<>(30));
-		
-		ContadorArbol ca = new ContadorArbol(ab);
 		
 		ab.entreNiveles(0,3);
 		System.out.println("----------------------------------------");
