@@ -21,8 +21,8 @@ public class prueba {
 		
 		ab.entreNiveles(0,3);
 		System.out.println("----------------------------------------");
-		LinkedList<Integer> l = ca.numerosParesIO();
-		for(int i:l) System.out.println(i);
+		//LinkedList<Integer> l = ca.numerosParesIO();
+		//for(int i:l) System.out.println(i);
 	}
 	
 	

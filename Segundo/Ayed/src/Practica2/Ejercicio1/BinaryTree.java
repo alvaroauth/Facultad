@@ -111,33 +111,22 @@ public class BinaryTree <T> {
  		int nivelActual=0;    
  		boolean ok = true;
  		
- 		while (!cola.isEmpty() && ok) { 
+ 		while (!cola.isEmpty() && nivelActual<=m) { 
  			int cantNodos = cola.size();
  			
- 			if (nivelActual>=n && nivelActual<=m) { 
+ 			 { 
  				
  			for (int i=0;i<cantNodos;i++) {  
  				BinaryTree <T> elem = cola.remove();
- 				System.out.print("|" + elem.getData().toString()+"|");
+ 				if (nivelActual>=n && nivelActual<=m)
+ 					System.out.print("|" + elem.getData().toString()+"|");
  				if (elem.hasLeftChild())cola.offer(elem.getLeftChild());
  				if (elem.hasRightChild())cola.offer(elem.getRightChild());
  			}
- 			System.out.println();
- 			}
-
- 			else	
- 			{
- 				for (int i=0;i<cantNodos;i++) {	
- 					
- 					BinaryTree<T> elem =cola.remove();
- 					if (elem.hasLeftChild())cola.offer(elem.getLeftChild());
- 					if (elem.hasRightChild())cola.offer(elem.getRightChild());
- 				}
+ 			if (nivelActual>=n && nivelActual<=m)
+ 				System.out.println();
  			}
  		nivelActual++;
- 		
- 		if (nivelActual>m)
- 			ok = false; 
  		}
  	}
 }

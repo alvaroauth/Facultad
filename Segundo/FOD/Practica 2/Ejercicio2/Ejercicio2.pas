@@ -200,8 +200,7 @@ begin
 			2: imprimirMaestro(maes);
 			3: crearDetalle(deta);
 			4: imprimirDetalle(deta);
-			5: actualizarMaestro(maes,deta);
-			6: generarTXTStock(Maes);
+			//5: actualizarMaestro(maes,deta);
 		end;
 		writeln('----------------------------------------');
 	until (fin);
