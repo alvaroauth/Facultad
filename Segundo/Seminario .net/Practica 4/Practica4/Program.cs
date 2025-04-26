@@ -23,6 +23,15 @@ if (!string.IsNullOrEmpty(st)){
         case 6:
             Ejercicio6.ejecutar();
             break;
+        case 7:
+            Ejercicio7.ejecutar();
+            break;
+        case 8:
+            Ejercicio8.ejecutar();
+            break;
+        case 9:
+            Ejercicio9.ejecutar();
+            break;
         
 
     }
