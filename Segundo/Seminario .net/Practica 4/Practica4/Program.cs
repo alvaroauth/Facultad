@@ -32,6 +32,9 @@ if (!string.IsNullOrEmpty(st)){
         case 9:
             Ejercicio9.ejecutar();
             break;
+        case 10:
+            Ejercicio10.ejecutar();
+            break;
         
 
     }

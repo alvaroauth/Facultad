@@ -6,7 +6,7 @@ class Ejercicio10{
         cuenta.Imprimir();
         cuenta = new Cuenta("José Perez");
         cuenta.Imprimir();
-        cuenta = new Cuenta("Maria Diaz", 20287544);
+        cuenta = new Cuenta("Maria Diaz", "20287544");
         cuenta.Imprimir();
         cuenta.Depositar(200);
         cuenta.Imprimir();
