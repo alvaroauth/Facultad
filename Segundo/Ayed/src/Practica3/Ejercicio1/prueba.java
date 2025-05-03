@@ -37,14 +37,16 @@ public class prueba {
 	    arbol.addChild(arbolC);
 	    arbol.addChild(arbolD);
 	    
+	    System.out.println("Ancho: "+arbol.ancho());
 	    
+	    System.out.println("Raiz: "+arbol.nivel(4));
 	    
-	    System.out.println("Raiz: "+arbol.altura());
+	    System.out.println("Nodo 83: "+arbol.nivel(83));
 	    
-	    System.out.println("Nodo 83: "+arbolC.altura());
+	    System.out.println("Nodo 61: "+arbol.nivel(61));
 	    
-	    System.out.println("Nodo 61: "+arbolE.altura());
+	    System.out.println("Nodo 123: "+arbol.nivel(123));
 	    
-	    System.out.println("Nodo 123: "+arbolI.altura());
+	    System.out.println("Nodo 999 (no existe): "+arbol.nivel(999));
 	}
 }
