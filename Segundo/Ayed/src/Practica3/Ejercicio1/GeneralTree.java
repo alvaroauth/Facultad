@@ -125,4 +125,41 @@ public class GeneralTree<T>{
     	return max;
     }
     
+    public boolean esAncestro(T a, T b) {
+    	if ((this != null)&&(!this.isEmpty())) return esAncestroAux(a, b);
+    	else return false;
+    }
+    
+    private boolean esAncestroAux(T a, T b) {
+    	GeneralTree<T> nodoA = buscarNodo(a);
+    	if (nodoA != null) {
+    		return buscarB(nodoA, b);
+    	}
+    	return false;
+    }
+    
+    private boolean buscarB (GeneralTree<T>  a, T b) {
+    	if (a.getData().equals(b)) {
+            return true;
+        }
+    	Iterator<GeneralTree<T>> it = a.getChildren().iterator();  	
+        boolean resultado = false;
+        while(it.hasNext() && !resultado)
+        	resultado = buscarB(it.next(), b);
+        return resultado;
+    }
+    
+
+    
+    private GeneralTree<T> buscarNodo(T dato){
+    	if (this.getData().equals(dato)) {
+            return this;
+        }
+    	
+        Iterator<GeneralTree<T>> it = this.getChildren().iterator();
+        GeneralTree<T> resultado = null;
+        while(it.hasNext() && resultado == null)
+        	resultado = it.next().buscarNodo(dato);
+        return resultado;
+    }
 }

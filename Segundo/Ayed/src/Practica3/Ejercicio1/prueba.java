@@ -37,6 +37,10 @@ public class prueba {
 	    arbol.addChild(arbolC);
 	    arbol.addChild(arbolD);
 	    
+	    
+	    
+	    System.out.println(arbol.esAncestro(3, 4));
+	    
 	    System.out.println("Ancho: "+arbol.ancho());
 	    
 	    System.out.println("Raiz: "+arbol.nivel(4));
