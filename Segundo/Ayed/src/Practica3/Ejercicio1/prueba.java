@@ -52,5 +52,7 @@ public class prueba {
 	    System.out.println("Nodo 123: "+arbol.nivel(123));
 	    
 	    System.out.println("Nodo 999 (no existe): "+arbol.nivel(999));
+	    
+	    arbol.imprimirPorNiveles();
 	}
 }

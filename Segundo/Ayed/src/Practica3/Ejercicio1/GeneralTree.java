@@ -162,4 +162,23 @@ public class GeneralTree<T>{
         	resultado = it.next().buscarNodo(dato);
         return resultado;
     }
+    
+    public void imprimirPorNiveles() {
+    	Queue<GeneralTree<T>> cola = new LinkedList<>();
+		cola.offer(this);
+		GeneralTree<T> nodo;
+		int cantNodos;
+		
+		while (!cola.isEmpty()) {
+			cantNodos = cola.size();
+			for(int i = 0 ; i < cantNodos ; i++) {
+				nodo = cola.remove();
+				System.out.print(nodo.getData()+" | ");
+				
+				for (GeneralTree<T> h : nodo.getChildren())
+					cola.add(h);
+			}
+			System.out.println();
+		}
+    }
 }
