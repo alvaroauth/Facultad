@@ -1,6 +1,5 @@
 package ParcialesArboles.Colapinto;
 
-import ParcialesArboles.Parcial04.Parcial;
 import Practica3.Ejercicio1.GeneralTree;
 
 public class prueba {

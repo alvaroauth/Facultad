@@ -45,8 +45,8 @@ public class GeneralTree<T>{
         return !this.getChildren().isEmpty();
     }
     
-    public boolean isEmpty(){
-        return (!(this.getData() == null) && !this.hasChildren());
+    public boolean isEmpty() {
+        return this.data == null && !this.hasChildren();
     }
     
     public void removeChildren(GeneralTree<T> child){

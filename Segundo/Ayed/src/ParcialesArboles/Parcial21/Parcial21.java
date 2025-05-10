@@ -45,7 +45,7 @@ public class Parcial21 {
 		
 		ParcialArboles p = new ParcialArboles(raiz);
 		
-		System.out.println(p.nivel(3));
+		System.out.println(p.nivel(2));
 		
 	}
 }

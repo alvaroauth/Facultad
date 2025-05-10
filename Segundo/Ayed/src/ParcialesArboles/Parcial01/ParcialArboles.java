@@ -1,44 +1,43 @@
 package ParcialesArboles.Parcial01;
 
-import Practica3.Ejercicio1.GeneralTree;
-import java.util.*;
+import Practica2.Ejercicio1.BinaryTree;
 
 public class ParcialArboles {
-	private GeneralTree<Integer> ArbolGeneral;
+	private BinaryTree<Integer> ab;
 
-	public ParcialArboles(GeneralTree<Integer> arbolGeneral) {
+	public ParcialArboles(BinaryTree<Integer> ab) {
 		super();
-		ArbolGeneral = arbolGeneral;
+		this.ab = ab;
 	}
 	
-	public ParcialArboles() {}
-	
-	public List<Integer> camino(int num){
-		List<Integer> camino = new LinkedList<>();
-		if ( ArbolGeneral != null && !ArbolGeneral.isEmpty()) {
-			_camino(num, ArbolGeneral, camino);
-		}
-		return camino;
+	public boolean isTwoTree(int num) {
+		BinaryTree<Integer> arb = buscarNodo(ab, num);
+        return (arb != null && !arb.isEmpty()) ? _isTwoTree(arb) : false;
 	}
 	
-	private boolean _camino(int num, GeneralTree<Integer> a, List<Integer> camino) {
-		boolean encontre = false;
-		camino.add(a.getData());
-		if (a.isLeaf())
-			return true;
-		
-		if (a.getChildren().size() >= num) {
-			
-			Iterator<GeneralTree<Integer>> it = a.getChildren().iterator();
-			
-			while (it.hasNext() && !encontre)
-				encontre = _camino(num, it.next(), camino);
-			
-		}
-		else if (!encontre)
-			camino.remove(camino.size()-1);
-		return encontre;
-
+	private boolean _isTwoTree(BinaryTree<Integer> a) {
+		int cantDer = -1;
+		int cantIzq = -1;
+		if (a.hasLeftChild()) cantIzq = cant2Hijos(a.getLeftChild());
+		if (a.hasRightChild()) cantDer = cant2Hijos(a.getRightChild());
+		return cantDer == cantIzq;
 	}
 	
+	private int cant2Hijos (BinaryTree<Integer> a) {
+		int cant = 0;
+		if (a.hasLeftChild() && a.hasRightChild())
+			cant++;
+		if (a.hasLeftChild()) cant += cant2Hijos(a.getLeftChild());
+		if (a.hasRightChild()) cant += cant2Hijos(a.getRightChild());
+		return cant;
+	}
+	
+	private BinaryTree<Integer> buscarNodo(BinaryTree<Integer> a, int num) {
+		if (a.getData().equals(num))
+			return a;
+		BinaryTree<Integer> nodo = null;
+		if (a.hasLeftChild()) nodo = buscarNodo(a.getLeftChild(), num);
+		if (a.hasRightChild() && nodo == null) nodo = buscarNodo(a.getRightChild(), num);
+		return nodo;
+	}
 }
