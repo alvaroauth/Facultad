@@ -1,0 +1,15 @@
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\bin\Debug\net8.0\Practica9.exe
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\bin\Debug\net8.0\Practica9.deps.json
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\bin\Debug\net8.0\Practica9.runtimeconfig.json
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\bin\Debug\net8.0\Practica9.dll
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\bin\Debug\net8.0\Practica9.pdb
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\obj\Debug\net8.0\Practica9.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\obj\Debug\net8.0\Practica9.AssemblyInfoInputs.cache
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\obj\Debug\net8.0\Practica9.AssemblyInfo.cs
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\obj\Debug\net8.0\Practica9.csproj.CoreCompileInputs.cache
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\obj\Debug\net8.0\Practica9.sourcelink.json
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\obj\Debug\net8.0\Practica9.dll
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\obj\Debug\net8.0\refint\Practica9.dll
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\obj\Debug\net8.0\Practica9.pdb
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\obj\Debug\net8.0\Practica9.genruntimeconfig.cache
+C:\Users\alvaro\Desktop\Facultad\Segundo\Seminario .net\Practica 9\Practica9\obj\Debug\net8.0\ref\Practica9.dll
