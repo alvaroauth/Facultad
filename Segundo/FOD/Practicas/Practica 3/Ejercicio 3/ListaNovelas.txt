@@ -1,0 +1,17 @@
+-----------------------------------------------------
+ Codigo de novela: 100    Nombre: El Amor Eterno
+ Duracion:  45.50    Genero: Romantica
+ Precio: $120.75    Director: Sergio Martinez
+-----------------------------------------------------
+ Codigo de novela: 200    Nombre: La Venganza
+ Duracion:  50.00    Genero: Accion
+ Precio: $150.00    Director: Mariana Lopez
+-----------------------------------------------------
+ Codigo de novela: 300    Nombre: Vidas Cruzadas
+ Duracion:  55.20    Genero: Accion
+ Precio: $130.50    Director: Carlos Gomez
+-----------------------------------------------------
+-----------------------------------------------------
+ Codigo de novela: 500    Nombre: Risas y Llanto
+ Duracion:  48.00    Genero: Comedia
+ Precio: $110.00    Director: Juan Perez
