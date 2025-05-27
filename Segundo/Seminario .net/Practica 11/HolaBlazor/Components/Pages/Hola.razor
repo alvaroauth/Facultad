@@ -1,0 +1,15 @@
+@page "/hola"
+@rendermode InteractiveServer
+@using HolaBlazor.Entidades
+
+<h1>Listado de personas</h1>
+<ul>
+    @foreach (var p in lista)
+    {
+        <li>@p.Apellido, @p.Nombre (@p.Edad)</li>
+    }
+</ul>
+
+@code {
+    List<Persona> lista = Persona.GetLista();
+}

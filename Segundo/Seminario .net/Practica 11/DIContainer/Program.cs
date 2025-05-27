@@ -1,2 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using DIContainer.Clases;
+using DIContainer.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+
+var servicios = new ServiceCollection();
+servicios.AddTransient<ILogger, LoggerConsola>();
+servicios.AddTransient<IServicioX, ServicioX>();
+var proveedor = servicios.BuildServiceProvider();
+
+var servicioX = proveedor.GetService<IServicioX>();
+servicioX?.Ejecutar();
+
+var logger = proveedor.GetService<ILogger>();
+logger?.Log("Fin del programa"); 
