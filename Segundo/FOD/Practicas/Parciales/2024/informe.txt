@@ -1,0 +1,54 @@
+Empresa
+	Sucursal: 1
+		Empleado: 10001
+			Anio: 101	Monto: 1200.00	Cantidad: 2
+		Totales		Cantidad de Prestamos: 2	Monto de los Prestamos: 1200.00
+
+		Empleado: 10002
+			Anio: 101	Monto: 600.00	Cantidad: 1
+			Anio: 138	Monto: 800.00	Cantidad: 1
+		Totales		Cantidad de Prestamos: 2	Monto de los Prestamos: 1400.00
+
+		Empleado: 10003
+			Anio: 143	Monto: 650.00	Cantidad: 1
+		Totales		Cantidad de Prestamos: 1	Monto de los Prestamos: 650.00
+
+	Totales		Cantidad de Prestamos: 5	Monto de los Prestamos: 3250.00
+
+	Sucursal: 2
+		Empleado: 20001
+			Anio: 101	Monto: 550.00	Cantidad: 1
+			Anio: 114	Monto: 750.00	Cantidad: 1
+		Totales		Cantidad de Prestamos: 2	Monto de los Prestamos: 1300.00
+
+		Empleado: 20002
+			Anio: 114	Monto: 800.00	Cantidad: 1
+			Anio: 137	Monto: 900.00	Cantidad: 1
+		Totales		Cantidad de Prestamos: 2	Monto de los Prestamos: 1700.00
+
+		Empleado: 20003
+			Anio: 137	Monto: 850.00	Cantidad: 1
+		Totales		Cantidad de Prestamos: 1	Monto de los Prestamos: 850.00
+
+	Totales		Cantidad de Prestamos: 5	Monto de los Prestamos: 3850.00
+
+	Sucursal: 3
+		Empleado: 29001
+			Anio: 101	Monto: 650.00	Cantidad: 1
+			Anio: 115	Monto: 700.00	Cantidad: 1
+		Totales		Cantidad de Prestamos: 2	Monto de los Prestamos: 1350.00
+
+		Empleado: 29002
+			Anio: 115	Monto: 1550.00	Cantidad: 2
+		Totales		Cantidad de Prestamos: 2	Monto de los Prestamos: 1550.00
+
+		Empleado: 29003
+			Anio: 115	Monto: 850.00	Cantidad: 1
+		Totales		Cantidad de Prestamos: 1	Monto de los Prestamos: 850.00
+
+	Totales		Cantidad de Prestamos: 5	Monto de los Prestamos: 3750.00
+
+---------------------------------------------------------------------------------------------------------------------------
+Cantidad de Prestamos de la empresa: 15
+Monto total de los prestamos de la empresa: 10850.00
+---------------------------------------------------------------------------------------------------------------------------

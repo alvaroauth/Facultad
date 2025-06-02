@@ -97,6 +97,7 @@ begin
 	end
 	else
 		writeln('No se encontro la flor D:');
+		
 	writeln;
 	close(a);
 end;
@@ -171,7 +172,7 @@ BEGIN
 	assign(arch, 'archivoFlores.dat');
 	repeat 
 		writeln ('    *-*-*-*-*-*-* MENU PRINCIPAL *-*-*-*-*-*-*');
-		writeln (' 1. Finalizar.');
+		writeln (' 0. Finalizar.');
 		writeln (' 1. Cargar Archivo Manualmente.');
 		writeln (' 2. Cargar Archivo de Ejemplo.');
 		writeln (' 3. Cargar una Nueva Persona.');
