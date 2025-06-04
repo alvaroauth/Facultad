@@ -11,6 +11,6 @@ Repositorio con apuntes, prácticas y resoluciones de materias de la carrera Lic
 
 ### Segundo año
 
-- [`AyED`](./segundo/AyED)
-- [`FOD`](./segundo/FOD)
-- [`Seminario .NET`](./segundo/Seminario%20.net)
+- [`AyED`](./Segundo/AyED)
+- [`FOD`](./Segundo/FOD)
+- [`Seminario .NET`](./Segundo/Seminario%20.net)
