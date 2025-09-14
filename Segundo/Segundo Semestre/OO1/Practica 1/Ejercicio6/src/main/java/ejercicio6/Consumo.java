@@ -13,20 +13,16 @@ public class Consumo {
         return energiaActiva;
     }
 
-    public void setEnergiaActiva(double energiaActiva) {
-        this.energiaActiva = energiaActiva;
-    }
-
     public double getEnergiaReactiva() {
         return energiaReactiva;
     }
 
-    public void setEnergiaReactiva(double energiaReactiva) {
-        this.energiaReactiva = energiaReactiva;
+    public double getPrecio(double p){
+        return energiaActiva * p;
     }
 
     public boolean beneficio(){
-        return (0.8 >= this.energiaActiva / (Math.sqrt(Math.pow(energiaActiva, 2) + Math.pow(energiaReactiva, 2))));
+        return (0.8 >= this.energiaActiva / (Math.sqrt(Math.pow(energiaActiva, 2) + Math.pow(energiaReactiva, 2))));  //no tengo la mas minima idea de por que va asi
     }
 
 }
