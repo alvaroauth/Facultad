@@ -72,25 +72,33 @@ public class Mamifero {
         return (this.padre != null)? this.padre.getMadre() : null;
     }
 
-    private boolean _tieneComoAncestroA(Mamifero anc){
+    public boolean tieneComoAncestroA(Mamifero anc){
+        if (this.getPadre() == anc || this.getMadre() == anc)
+            return true;
+        else if ((this.padre != null && this.padre.tieneComoAncestroA(anc)) || this.madre != null && this.madre.tieneComoAncestroA(anc))
+            return true;
+        return false;
+    }
+
+    //Segunda opcion (No agrega ningun metodo privado en el uml asi q raro)
+
+    public boolean tieneComoAncestroA2(Mamifero unMamifero){
+        if (unMamifero != null && this != unMamifero)
+            return _tieneComoAncestroA2(unMamifero);
+        return false;
+    }
+
+    private boolean _tieneComoAncestroA2(Mamifero anc){
         if (this == anc)
             return true;
 
         boolean ok = false;
 
         if (this.padre != null)
-            ok =  this.padre._tieneComoAncestroA(anc);
+            ok =  this.padre._tieneComoAncestroA2(anc);
         if (!ok && this.madre != null)
-            ok =  this.madre._tieneComoAncestroA(anc);
+            ok =  this.madre._tieneComoAncestroA2(anc);
 
         return ok;
     }
-
-    public boolean tieneComoAncestroA(Mamifero unMamifero){
-        if (unMamifero != null && this != unMamifero)
-            return _tieneComoAncestroA(unMamifero);
-        else
-            return false;
-    }
-
 }
