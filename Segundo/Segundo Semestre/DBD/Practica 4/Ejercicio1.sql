@@ -36,3 +36,23 @@ EXCEPT
 FROM Cliente NATURAL JOIN Factura NATURAL JOIN Detalle NATURAL JOIN Producto
 WHERE apellido = "Garcia")
 
+/* 4. Listar nombre, descripción, precio y stock de productos no vendidos a clientes que tengan
+teléfono con característica 221 (la característica está al comienzo del teléfono). Ordenar por
+nombre. */
+
+(SELECT nombreP, precio, descripcion, stock
+FROM Producto)
+EXCEPT
+(SELECT nombreP, precio, descripcion, stock
+FROM Cliente NATURAL JOIN Factura NATURAL JOIN Detalle NATURAL JOIN Producto
+WHERE telefono LIKE "221%");
+
+/* 5. Listar para cada producto nombre, descripción, precio y cuantas veces fue vendido. Tenga en
+cuenta que puede no haberse vendido nunca el producto. */
+
+SELECT nombreP, precioUnitario, descripcion, SUM(cantidad) as cantVendida
+FROM Producto LEFT JOIN Detalle ON (Producto.idProducto = Detalle.idProducto)
+GROUP BY nombreP, precioUnitario, descripcion
+
+
+
