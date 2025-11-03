@@ -1,0 +1,13 @@
+--- Conceptos candidatos ---
+- Reserva
+- Propiedades
+- Usuarios
+- Inmuebles
+- Alquiler
+- Reservas
+- Nombre
+- DNI
+- Direccion
+- Direccion (propiedad)
+- Nombre descriptivo
+- Precio
