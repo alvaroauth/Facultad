@@ -50,6 +50,6 @@ podadores con apellido terminado con el string ‘ata’ y que tengan al menos u
 
 SELECT DISTINCT p.DNI, p.nombre, p.apellido, p.fnac, l.nombreL
 FROM Podador p INNER JOIN Localidad l ON (l.codigoPostal = p.codigoPostalVive)
-WHERE p.apellido LIKE "%ata" AND p.DNI IN (SELECT DNI FROM Poda)
-ORDER BY p.apellido, p.nombre
+WHERE p.apellido LIKE "%ata" AND EXISTS (SELECT DNI FROM Poda)
+ORDER BY p.apellido, p.nombre;
 
