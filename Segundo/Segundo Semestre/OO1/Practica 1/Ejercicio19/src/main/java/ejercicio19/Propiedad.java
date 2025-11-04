@@ -1,6 +1,7 @@
 package ejercicio19;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Propiedad {
@@ -8,6 +9,13 @@ public class Propiedad {
     private String nombreDesc;
     private double precio;
     private List<Reserva> reservas;
+
+    public Propiedad(String direccion, String nombreDesc, double precio) {
+        this.direccion = direccion;
+        this.nombreDesc = nombreDesc;
+        this.precio = precio;
+        this.reservas = new ArrayList<>();
+    }
 
     public double getPrecio(){
         return this.precio;
@@ -41,6 +49,6 @@ public class Propiedad {
 
     public boolean estaDisponible(LocalDate desde, LocalDate hasta){
         DateLapse dl = new DateLapse(desde, hasta);
-        return this.reservas.stream().anyMatch(r -> r.coincidePeriodo(dl));
+        return this.reservas.stream().noneMatch(r -> r.coincidePeriodo(dl));
     }
 }
