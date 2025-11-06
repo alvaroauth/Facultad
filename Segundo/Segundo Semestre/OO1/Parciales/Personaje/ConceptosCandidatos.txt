@@ -1,0 +1,14 @@
+--- Conceptos Candidatos ---
+- Personaje
+- Especie
+- Humano
+- Orco
+- Nombre
+- Nivel
+- Habilidades
+- Inteligencia
+- Fuerza
+- Rol
+- Mago
+- Guerrero
+- Poder de Ataque
