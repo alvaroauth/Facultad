@@ -89,3 +89,5 @@ SELECT l.nombreL, l.descripcion, l.nroHabitantes
 FROM Localidad l INNER JOIN Arbol a ON (l.codigoPostal = a.codigoPostal)
 GROUP BY l.codigoPostal
 HAVING COUNT(a.nroArbol) < 5
+
+
