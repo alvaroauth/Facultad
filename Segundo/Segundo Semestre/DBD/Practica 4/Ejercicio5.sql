@@ -96,4 +96,4 @@ HAVING COUNT(*) >= 5
 /* 10. Borrar al cliente con DNI 40325692. */
 
 DELETE FROM Viaje v WHERE v.dni = '40325692';
-DELETE FROM Cliente c WHERE c.dni = '40325692';
+DELETE FROM Cliente c WHERE c.dni = '40325692'; 
